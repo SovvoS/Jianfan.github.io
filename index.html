@@ -198,7 +198,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -208,7 +208,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -280,7 +280,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-25T21:52:27+08:00">
                 2017-05-25
@@ -324,7 +324,7 @@
 </li>
 <li><p>题目大意：求最后气球被上了几次颜色</p>
 </li>
-<li><p>思路：线段树区间更新，加延迟标记， 在输出的时候将父节点的信息传递给孩子节点</p>
+<li><p>思路：线段树区间更新,加延迟标记,在输出的时候将父节点的信息传递给孩子节点</p>
 </li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kMaxN = <span class="number">100001</span>;</div><div class="line"><span class="keyword">int</span> kN;</div><div class="line"><span class="keyword">int</span> kCnt;</div><div class="line"><span class="keyword">int</span> kArr[kMaxN&lt;&lt;<span class="number">2</span>];</div><div class="line"><span class="keyword">bool</span> kLazy[kMaxN&lt;&lt;<span class="number">2</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">BuildTree</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">memset</span>(kArr, <span class="number">0</span>, <span class="keyword">sizeof</span>(kArr));</div><div class="line">	<span class="built_in">memset</span>(kLazy, <span class="literal">false</span>, <span class="keyword">sizeof</span>(kLazy));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">PushDown</span><span class="params">(<span class="keyword">int</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(kLazy[rt])</div><div class="line">	&#123;</div><div class="line">		kLazy[rt&lt;&lt;<span class="number">1</span>] = kLazy[rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>] = <span class="literal">true</span>;</div><div class="line">		kLazy[rt] = <span class="literal">false</span>;</div><div class="line">		kArr[rt&lt;&lt;<span class="number">1</span>] += kArr[rt];</div><div class="line">		kArr[rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>] += kArr[rt];</div><div class="line">		kArr[rt] = <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">UpdateTree</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(l &lt;= left &amp;&amp; right &lt;= r)&#123;</div><div class="line">		kArr[rt] += <span class="number">1</span>;</div><div class="line">		kLazy[rt] = <span class="literal">true</span>;</div><div class="line">		<span class="keyword">return</span> ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> mid = (left + right) &gt;&gt; <span class="number">1</span>;</div><div class="line">	<span class="keyword">if</span>(mid &gt;= l)</div><div class="line">		UpdateTree(l, r, left, mid, rt&lt;&lt;<span class="number">1</span>);</div><div class="line">	<span class="keyword">if</span>(mid &lt; r)</div><div class="line">		UpdateTree(l, r, mid + <span class="number">1</span>, right, rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">QueryTree</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> rt)</span></span></div><div class="line">&#123;</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(left == right)</div><div class="line">	&#123;</div><div class="line">	    <span class="keyword">if</span>(kCnt != kN<span class="number">-1</span>) <span class="built_in">printf</span>(<span class="string">"%d "</span>, kArr[rt]);</div><div class="line">        <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, kArr[rt]);</div><div class="line">        ++ kCnt;</div><div class="line">		<span class="keyword">return</span> ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span>(left != right &amp;&amp; kLazy[rt] == <span class="literal">true</span>)</div><div class="line">		PushDown(rt);</div><div class="line">	<span class="keyword">int</span> mid = (left + right) &gt;&gt; <span class="number">1</span>;</div><div class="line">	QueryTree(left, mid, rt&lt;&lt;<span class="number">1</span>);</div><div class="line">	QueryTree(mid+<span class="number">1</span>, right, rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;kN)!=EOF)</div><div class="line">	&#123;</div><div class="line">	    <span class="keyword">if</span>(kN == <span class="number">0</span>)</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">	    kCnt = <span class="number">0</span>;</div><div class="line">		BuildTree();</div><div class="line">		<span class="keyword">int</span> a, b;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kN; ++i)</div><div class="line">		&#123;</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;a, &amp;b);</div><div class="line">			<span class="keyword">if</span>(a&gt;b)	swap(a,b);</div><div class="line">			UpdateTree(a, b, <span class="number">1</span>, kN, <span class="number">1</span>);</div><div class="line">		&#125;</div><div class="line">		QueryTree(<span class="number">1</span>, kN, <span class="number">1</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -400,7 +400,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-19T22:35:55+08:00">
                 2017-05-19
@@ -520,7 +520,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-19T22:35:55+08:00">
                 2017-05-19
@@ -640,7 +640,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-19T20:41:03+08:00">
                 2017-05-19
@@ -757,7 +757,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-19T10:25:58+08:00">
                 2017-05-19
@@ -871,7 +871,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-19T09:28:13+08:00">
                 2017-05-19
@@ -991,7 +991,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-16T10:15:26+08:00">
                 2017-05-16
@@ -1119,7 +1119,7 @@
             <div class="site-state-item site-state-posts">
               <a href="/archives">
                 <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -1132,7 +1132,7 @@
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">tags</span>
               
             </div>
           
@@ -1182,7 +1182,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
