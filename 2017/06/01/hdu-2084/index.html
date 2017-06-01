@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="data structrue," />
+  <meta name="keywords" content="dp," />
 
 
 
@@ -90,17 +90,17 @@
 
 
 
-<meta name="description" content="题目链接: http://acm.hdu.edu.cn/showproblem.php?pid=2795 题目大意: 给你一个HW的黑板，在上面贴海报，但是有一个要求，每次只能贴最上面的且靠右的地方，每张海报都是1W的，不能覆盖，问每张海报贴在第几行 思路：线段树询问区间最大值，因为N只有200000， 所以按照H来建树  123456789101112131415161718192021222">
-<meta name="keywords" content="data structrue">
+<meta name="description" content="题目链接：http://acm.hdu.edu.cn/showproblem.php?pid=2084  题目大意: 给你一个数字三角形，求路径和最大  思路：数字三角形DP   12345678910111213141516171819202122232425262728293031#include &amp;lt;bits/stdc++.h&amp;gt;using namespace std;const">
+<meta name="keywords" content="dp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hdu-2795">
-<meta property="og:url" content="http://yoursite.com/2017/05/26/hdu-2795/index.html">
+<meta property="og:title" content="hdu-2084">
+<meta property="og:url" content="http://yoursite.com/2017/06/01/hdu-2084/index.html">
 <meta property="og:site_name" content="Sprout&#39;s Blog">
-<meta property="og:description" content="题目链接: http://acm.hdu.edu.cn/showproblem.php?pid=2795 题目大意: 给你一个HW的黑板，在上面贴海报，但是有一个要求，每次只能贴最上面的且靠右的地方，每张海报都是1W的，不能覆盖，问每张海报贴在第几行 思路：线段树询问区间最大值，因为N只有200000， 所以按照H来建树  123456789101112131415161718192021222">
-<meta property="og:updated_time" content="2017-05-30T09:13:12.281Z">
+<meta property="og:description" content="题目链接：http://acm.hdu.edu.cn/showproblem.php?pid=2084  题目大意: 给你一个数字三角形，求路径和最大  思路：数字三角形DP   12345678910111213141516171819202122232425262728293031#include &amp;lt;bits/stdc++.h&amp;gt;using namespace std;const">
+<meta property="og:updated_time" content="2017-06-01T12:43:58.769Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hdu-2795">
-<meta name="twitter:description" content="题目链接: http://acm.hdu.edu.cn/showproblem.php?pid=2795 题目大意: 给你一个HW的黑板，在上面贴海报，但是有一个要求，每次只能贴最上面的且靠右的地方，每张海报都是1W的，不能覆盖，问每张海报贴在第几行 思路：线段树询问区间最大值，因为N只有200000， 所以按照H来建树  123456789101112131415161718192021222">
+<meta name="twitter:title" content="hdu-2084">
+<meta name="twitter:description" content="题目链接：http://acm.hdu.edu.cn/showproblem.php?pid=2084  题目大意: 给你一个数字三角形，求路径和最大  思路：数字三角形DP   12345678910111213141516171819202122232425262728293031#include &amp;lt;bits/stdc++.h&amp;gt;using namespace std;const">
 
 
 
@@ -128,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/26/hdu-2795/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/01/hdu-2084/"/>
 
 
 
 
 
-  <title>hdu-2795 | Sprout's Blog</title>
+  <title>hdu-2084 | Sprout's Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -254,7 +254,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/26/hdu-2795/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/01/hdu-2084/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jianfan He">
@@ -271,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hdu-2795</h1>
+          <h1 class="post-title" itemprop="name headline">hdu-2084</h1>
         
 
         <div class="post-meta">
@@ -283,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-26T15:36:18+08:00">
-                2017-05-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-01T20:39:32+08:00">
+                2017-06-01
               </time>
             
 
@@ -319,11 +319,14 @@
 
       
         <ul>
-<li>题目链接: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2795" target="_blank" rel="external">http://acm.hdu.edu.cn/showproblem.php?pid=2795</a></li>
-<li>题目大意: 给你一个H<em>W的黑板，在上面贴海报，但是有一个要求，每次只能贴最上面的且靠右的地方，每张海报都是1</em>W的，不能覆盖，问每张海报贴在第几行</li>
-<li>思路：线段树询问区间最大值，因为N只有200000， 所以按照H来建树</li>
+<li><p>题目链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=2084" target="_blank" rel="external">http://acm.hdu.edu.cn/showproblem.php?pid=2084</a></p>
+</li>
+<li><p>题目大意: 给你一个数字三角形，求路径和最大</p>
+</li>
+<li><p>思路：数字三角形DP</p>
+</li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kMaxN = <span class="number">200001</span>;</div><div class="line"><span class="keyword">int</span> kMax[kMaxN&lt;&lt;<span class="number">2</span>];</div><div class="line"></div><div class="line"><span class="keyword">int</span> kN, kW, kH;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">PushUp</span><span class="params">(<span class="keyword">int</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    kMax[rt] = max(kMax[rt&lt;&lt;<span class="number">1</span>], kMax[rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">BuildTree</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(l == r)&#123;</div><div class="line">        kMax[rt] = kW;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</div><div class="line">    BuildTree(l, mid, rt&lt;&lt;<span class="number">1</span>);</div><div class="line">    BuildTree(mid+<span class="number">1</span>, r, rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>);</div><div class="line">    PushUp(rt);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">QueryTree</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(kMax[rt] &lt; w)</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    <span class="keyword">if</span>(l == r)</div><div class="line">    &#123;</div><div class="line">        kMax[rt] -= w;</div><div class="line">        <span class="keyword">return</span> l;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</div><div class="line">    <span class="keyword">int</span> ret = kMaxN;</div><div class="line">    <span class="keyword">if</span>(kMax[rt&lt;&lt;<span class="number">1</span>] &gt;= w)</div><div class="line">        ret = min(ret, QueryTree(w, l, (l+r)&gt;&gt;<span class="number">1</span>, rt&lt;&lt;<span class="number">1</span>));</div><div class="line">    <span class="keyword">else</span></div><div class="line">        ret = min(ret, QueryTree(w, mid + <span class="number">1</span>, r, rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>));</div><div class="line">    PushUp(rt);</div><div class="line">    <span class="keyword">return</span> ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;kH,&amp;kW, &amp;kN)!=EOF)</div><div class="line">    &#123;</div><div class="line">        kH = min(kN, kH);</div><div class="line">        BuildTree(<span class="number">1</span>, kH, <span class="number">1</span>);</div><div class="line">        <span class="keyword">int</span> w;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kN; ++i)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;w);</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, QueryTree(w, <span class="number">1</span>, kH, <span class="number">1</span>));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kMaxN = <span class="number">100</span>;</div><div class="line"><span class="keyword">int</span> kDp[<span class="number">2</span>][kMaxN];</div><div class="line"><span class="keyword">int</span> kArr[kMaxN][kMaxN];</div><div class="line"><span class="keyword">int</span> kN, kT;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;kT);</div><div class="line">	<span class="keyword">while</span>(kT--)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;kN);</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kN; ++i)</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;=i; ++j)</div><div class="line">				<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;kArr[i][j]);</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = kN<span class="number">-1</span>; i &gt;= <span class="number">0</span>; --i)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= i; ++j)</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">if</span>(i == kN<span class="number">-1</span>)</div><div class="line">					kDp[i&amp;<span class="number">1</span>][j] = kArr[i][j];</div><div class="line">				<span class="keyword">else</span></div><div class="line">				&#123;</div><div class="line">					kDp[i&amp;<span class="number">1</span>][j] = max(kDp[(i+<span class="number">1</span>)&amp;<span class="number">1</span>][j], kDp[(i+<span class="number">1</span>)&amp;<span class="number">1</span>][j+<span class="number">1</span>]) + kArr[i][j];</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,kDp[<span class="number">0</span>&amp;<span class="number">1</span>][<span class="number">0</span>]);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -353,7 +356,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/data-structrue/" rel="tag"># data structrue</a>
+            <a href="/tags/dp/" rel="tag"># dp</a>
           
         </div>
       
@@ -366,8 +369,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/25/hdu-1556/" rel="next" title="hdu-1556">
-                <i class="fa fa-chevron-left"></i> hdu-1556
+              <a href="/2017/06/01/cpp11-chapter15-1/" rel="next" title="cpp11-chapter15.1">
+                <i class="fa fa-chevron-left"></i> cpp11-chapter15.1
               </a>
             
           </div>
@@ -375,10 +378,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/30/hdu-5475/" rel="prev" title="hdu-5475">
-                hdu-5475 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
