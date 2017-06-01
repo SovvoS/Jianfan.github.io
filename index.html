@@ -728,126 +728,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/19/hdu-1754/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jianfan He">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://wx1.sinaimg.cn/mw1024/9f374deegy1fg3jeb0byqj20680683yn.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sprout's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/19/hdu-1754/" itemprop="url">hdu-1754</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-19T22:35:55+08:00">
-                2017-05-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p>题目链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=1754" target="_blank" rel="external">http://acm.hdu.edu.cn/showproblem.php?pid=1754</a></p>
-</li>
-<li><p>题目大意: 询问最大值</p>
-</li>
-<li><p>思路：线段树单点更新</p>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kMaxNum = <span class="number">200000</span>;</div><div class="line"><span class="keyword">int</span> kMax[kMaxNum&lt;&lt;<span class="number">2</span>];</div><div class="line"><span class="keyword">char</span> kOp[<span class="number">2</span>];</div><div class="line"><span class="keyword">int</span> kN, kM;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">PushUp</span><span class="params">(<span class="keyword">int</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    kMax[rt] = max(kMax[rt&lt;&lt;<span class="number">1</span>], kMax[rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>]);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">BuildTree</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(l == r)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;kMax[rt]);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> mid = (l + r)&gt;&gt;<span class="number">1</span>;</div><div class="line">    BuildTree(l, mid, rt&lt;&lt;<span class="number">1</span>);</div><div class="line">    BuildTree(mid+<span class="number">1</span>, r, rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>);</div><div class="line">    PushUp(rt);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">QueryTree</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(left &lt;= l &amp;&amp; r &lt;= right)</div><div class="line">        <span class="keyword">return</span> kMax[rt];</div><div class="line">    <span class="keyword">int</span> res = <span class="number">-1</span>;</div><div class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</div><div class="line">    <span class="keyword">if</span>(left &lt;= mid)</div><div class="line">        res = max(res, QueryTree(left, right, l, mid, rt&lt;&lt;<span class="number">1</span>));</div><div class="line">    <span class="keyword">if</span>(right &gt; mid)</div><div class="line">        res = max(res, QueryTree(left, right, mid+<span class="number">1</span>, r, rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>));</div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">UpdateTree</span><span class="params">(<span class="keyword">int</span> loc, <span class="keyword">int</span> val, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(l == r)</div><div class="line">    &#123;</div><div class="line">        kMax[rt] = val;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> mid = (l + r)&gt;&gt;<span class="number">1</span>;</div><div class="line">    <span class="keyword">if</span>(loc &lt;= mid)</div><div class="line">        UpdateTree(loc, val, l, mid, rt&lt;&lt;<span class="number">1</span>);</div><div class="line">    <span class="keyword">else</span></div><div class="line">        UpdateTree(loc, val, mid+<span class="number">1</span>, r, rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>);</div><div class="line">    PushUp(rt);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;kN, &amp;kM)!=EOF)</div><div class="line">    &#123;</div><div class="line">        BuildTree(<span class="number">1</span>, kN, <span class="number">1</span>);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kM; ++i)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%s"</span>,kOp);</div><div class="line">            <span class="keyword">int</span> a, b;</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;a, &amp;b);</div><div class="line">            <span class="keyword">if</span>(kOp[<span class="number">0</span>] == <span class="string">'Q'</span>)</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, QueryTree(a, b, <span class="number">1</span>, kN, <span class="number">1</span>));</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                UpdateTree(a, b, <span class="number">1</span>, kN, <span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/19/hdu-1166/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -968,6 +848,126 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/19/hdu-1754/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jianfan He">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://wx1.sinaimg.cn/mw1024/9f374deegy1fg3jeb0byqj20680683yn.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sprout's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/19/hdu-1754/" itemprop="url">hdu-1754</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-19T22:35:55+08:00">
+                2017-05-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p>题目链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=1754" target="_blank" rel="external">http://acm.hdu.edu.cn/showproblem.php?pid=1754</a></p>
+</li>
+<li><p>题目大意: 询问最大值</p>
+</li>
+<li><p>思路：线段树单点更新</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kMaxNum = <span class="number">200000</span>;</div><div class="line"><span class="keyword">int</span> kMax[kMaxNum&lt;&lt;<span class="number">2</span>];</div><div class="line"><span class="keyword">char</span> kOp[<span class="number">2</span>];</div><div class="line"><span class="keyword">int</span> kN, kM;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">PushUp</span><span class="params">(<span class="keyword">int</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    kMax[rt] = max(kMax[rt&lt;&lt;<span class="number">1</span>], kMax[rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>]);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">BuildTree</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(l == r)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;kMax[rt]);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> mid = (l + r)&gt;&gt;<span class="number">1</span>;</div><div class="line">    BuildTree(l, mid, rt&lt;&lt;<span class="number">1</span>);</div><div class="line">    BuildTree(mid+<span class="number">1</span>, r, rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>);</div><div class="line">    PushUp(rt);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">QueryTree</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(left &lt;= l &amp;&amp; r &lt;= right)</div><div class="line">        <span class="keyword">return</span> kMax[rt];</div><div class="line">    <span class="keyword">int</span> res = <span class="number">-1</span>;</div><div class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</div><div class="line">    <span class="keyword">if</span>(left &lt;= mid)</div><div class="line">        res = max(res, QueryTree(left, right, l, mid, rt&lt;&lt;<span class="number">1</span>));</div><div class="line">    <span class="keyword">if</span>(right &gt; mid)</div><div class="line">        res = max(res, QueryTree(left, right, mid+<span class="number">1</span>, r, rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>));</div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">UpdateTree</span><span class="params">(<span class="keyword">int</span> loc, <span class="keyword">int</span> val, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(l == r)</div><div class="line">    &#123;</div><div class="line">        kMax[rt] = val;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> mid = (l + r)&gt;&gt;<span class="number">1</span>;</div><div class="line">    <span class="keyword">if</span>(loc &lt;= mid)</div><div class="line">        UpdateTree(loc, val, l, mid, rt&lt;&lt;<span class="number">1</span>);</div><div class="line">    <span class="keyword">else</span></div><div class="line">        UpdateTree(loc, val, mid+<span class="number">1</span>, r, rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>);</div><div class="line">    PushUp(rt);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;kN, &amp;kM)!=EOF)</div><div class="line">    &#123;</div><div class="line">        BuildTree(<span class="number">1</span>, kN, <span class="number">1</span>);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kM; ++i)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%s"</span>,kOp);</div><div class="line">            <span class="keyword">int</span> a, b;</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;a, &amp;b);</div><div class="line">            <span class="keyword">if</span>(kOp[<span class="number">0</span>] == <span class="string">'Q'</span>)</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, QueryTree(a, b, <span class="number">1</span>, kN, <span class="number">1</span>));</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                UpdateTree(a, b, <span class="number">1</span>, kN, <span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/19/google-code-style-guide/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -987,7 +987,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/05/19/google-code-style-guide/" itemprop="url">google code style guide</a></h1>
+                <a class="post-title-link" href="/2017/05/19/google-code-style-guide/" itemprop="url">google-code-style-guide</a></h1>
         
 
         <div class="post-meta">
@@ -1036,13 +1036,13 @@
       
         
           
-            <h1 id="1-函数"><a href="#1-函数" class="headerlink" title="1. 函数"></a>1. 函数</h1><h1 id="2-命名约定"><a href="#2-命名约定" class="headerlink" title="2. 命名约定"></a>2. 命名约定</h1><h2 id="2-1-通用命名规则"><a href="#2-1-通用命名规则" class="headerlink" title="2.1 通用命名规则"></a>2.1 通用命名规则</h2><h4 id="总述"><a href="#总述" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>函数命名, 变量命名, 文件命名要有描述性; 少用缩写.</p>
+            <h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h1 id="命名约定"><a href="#命名约定" class="headerlink" title="命名约定"></a>命名约定</h1><h2 id="通用命名规则"><a href="#通用命名规则" class="headerlink" title="通用命名规则"></a>通用命名规则</h2><h4 id="总述"><a href="#总述" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>函数命名, 变量命名, 文件命名要有描述性; 少用缩写.</p>
 <h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a><strong>说明</strong></h4><p>尽可能使用描述性的命名, 别心疼空间, 毕竟相比之下让代码易于新读者理解更重要. 不要用只有项目开发者能理解的缩写, 也不要通过砍掉几个字母来缩写单词.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> price_count_reader;    <span class="comment">// 无缩写</span></div><div class="line"><span class="keyword">int</span> num_errors;            <span class="comment">// "num" 是一个常见的写法</span></div><div class="line"><span class="keyword">int</span> num_dns_connections;   <span class="comment">// 人人都知道 "DNS" 是什么</span></div><div class="line"><span class="keyword">int</span> n;                     <span class="comment">// 毫无意义.</span></div></pre></td></tr></table></figure>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> nerr;                  <span class="comment">// 含糊不清的缩写.</span></div><div class="line"><span class="keyword">int</span> n_comp_conns;          <span class="comment">// 含糊不清的缩写.</span></div><div class="line"><span class="keyword">int</span> wgc_connections;       <span class="comment">// 只有贵团队知道是什么意思.</span></div><div class="line"><span class="keyword">int</span> pc_reader;             <span class="comment">// "pc" 有太多可能的解释了.</span></div><div class="line"><span class="keyword">int</span> cstmr_id;              <span class="comment">// 删减了若干字母.`</span></div></pre></td></tr></table></figure>
 <p>注意, 一些特定的广为人知的缩写是允许的, 例如用 i 表示迭代变量和用 T 表示模板参数.</p>
 <p>模板参数的命名应当遵循对应的分类: 类型模板参数应当遵循 类型命名 的规则, 而非类型模板应当遵循 变量命名 的规则.</p>
-<h2 id="2-2-文件命名"><a href="#2-2-文件命名" class="headerlink" title="2.2 文件命名"></a>2.2 文件命名</h2><h4 id="总述-1"><a href="#总述-1" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>文件名要全部小写, 可以包含下划线 (<code>_</code>) 或连字符 (<code>-</code>), 依照项目的约定. 如果没有约定, 那么 “<code>_</code>” 更好.</p>
+<h2 id="文件命名"><a href="#文件命名" class="headerlink" title="文件命名"></a>文件命名</h2><h4 id="总述-1"><a href="#总述-1" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>文件名要全部小写, 可以包含下划线 (<code>_</code>) 或连字符 (<code>-</code>), 依照项目的约定. 如果没有约定, 那么 “<code>_</code>” 更好.</p>
 <h4 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a><strong>说明</strong></h4><p>可接受的文件命名示例:</p>
 <ul>
 <li><code>my_useful_class.cc</code></li>
@@ -1054,19 +1054,19 @@
 <p>不要使用已经存在于 <code>/usr/include</code> 下的文件名 (Yang.Y 注: 即编译器搜索系统头文件的路径), 如 <code>db.h</code>.</p>
 <p>通常应尽量让文件名更加明确. <code>http_server_logs.h</code> 就比 <code>logs.h</code> 要好. 定义类时文件名一般成对出现, 如 <code>foo_bar.h</code> 和 <code>foo_bar.cc</code>, 对应于类 <code>FooBar</code>.</p>
 <p>内联函数必须放在 <code>.h</code> 文件中. 如果内联函数比较短, 就直接放在 <code>.h</code> 中.</p>
-<h2 id="2-2-类型命名"><a href="#2-2-类型命名" class="headerlink" title="2.2 类型命名"></a>2.2 类型命名</h2><h4 id="总述-2"><a href="#总述-2" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>类型名称的每个单词首字母均大写, 不包含下划线: <code>MyExcitingClass</code>, <code>MyExcitingEnum</code>.</p>
+<h2 id="类型命名"><a href="#类型命名" class="headerlink" title="类型命名"></a>类型命名</h2><h4 id="总述-2"><a href="#总述-2" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>类型名称的每个单词首字母均大写, 不包含下划线: <code>MyExcitingClass</code>, <code>MyExcitingEnum</code>.</p>
 <h4 id="说明-2"><a href="#说明-2" class="headerlink" title="说明"></a><strong>说明</strong></h4><p>所有类型命名 —— 类, 结构体, 类型定义 (typedef), 枚举, 类型模板参数 —— 均使用相同约定, 即以大写字母开始, <strong>每个单词首字母均大写, 不包含下划线</strong>. 例如:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 类和结构体</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UrlTable</span> &#123;</span> ...</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UrlTableTester</span> &#123;</span> ...</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UrlTableProperties</span> &#123;</span> ...</div><div class="line"></div><div class="line"><span class="comment">// 类型定义</span></div><div class="line"><span class="keyword">typedef</span> hash_map&lt;UrlTableProperties *, <span class="built_in">string</span>&gt; PropertiesMap;</div><div class="line"></div><div class="line"><span class="comment">// using 别名</span></div><div class="line"><span class="keyword">using</span> PropertiesMap = hash_map&lt;UrlTableProperties *, <span class="built_in">string</span>&gt;;</div><div class="line"></div><div class="line"><span class="comment">// 枚举</span></div><div class="line"><span class="keyword">enum</span> UrlTableErrors &#123; ...</div></pre></td></tr></table></figure>
-<h2 id="2-3-变量命名"><a href="#2-3-变量命名" class="headerlink" title="2.3 变量命名"></a>2.3 变量命名</h2><h4 id="总述-3"><a href="#总述-3" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>变量 (包括函数参数) 和数据成员名一律小写, 单词之间用下划线连接. 类的成员变量以下划线结尾, 但结构体的就不用, 如: <code>a_local_variable</code>, <code>a_struct_data_member</code>, <code>a_class_data_member_</code>.</p>
+<h2 id="变量命名"><a href="#变量命名" class="headerlink" title="变量命名"></a>变量命名</h2><h4 id="总述-3"><a href="#总述-3" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>变量 (包括函数参数) 和数据成员名一律小写, 单词之间用下划线连接. 类的成员变量以下划线结尾, 但结构体的就不用, 如: <code>a_local_variable</code>, <code>a_struct_data_member</code>, <code>a_class_data_member_</code>.</p>
 <h4 id="说明-3"><a href="#说明-3" class="headerlink" title="说明"></a><strong>说明</strong></h4><h3 id="普通变量命名"><a href="#普通变量命名" class="headerlink" title="普通变量命名"></a><strong>普通变量命名</strong></h3><p>举例:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">string</span> table_name;  <span class="comment">// 好 - 用下划线.</span></div><div class="line"><span class="built_in">string</span> tablename;   <span class="comment">// 好 - 全小写.</span></div><div class="line"></div><div class="line"><span class="built_in">string</span> tableName;  <span class="comment">// 差 - 混合大小写</span></div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">string</span> table_name;  <span class="comment">// 好 - 用下划线.</span></div><div class="line"><span class="built_in">string</span> tablename;   <span class="comment">// 好 - 全小写.</span></div><div class="line"></div><div class="line"><span class="built_in">string</span> tableName;  <span class="comment">// 差 - 混合大小写</span></div></pre></td></tr></table></figure>
 <h3 id="类数据成员"><a href="#类数据成员" class="headerlink" title="类数据成员"></a><strong>类数据成员</strong></h3><p>不管是静态的还是非静态的, 类数据成员都可以和普通变量一样, 但要接下划线.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TableInfo</span> &#123;</span></div><div class="line">  ...</div><div class="line"> <span class="keyword">private</span>:</div><div class="line">  <span class="built_in">string</span> table_name_;  <span class="comment">// 好 - 后加下划线.</span></div><div class="line">  <span class="built_in">string</span> tablename_;   <span class="comment">// 好.</span></div><div class="line">  <span class="keyword">static</span> Pool&lt;TableInfo&gt;* pool_;  <span class="comment">// 好.</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="结构体变量"><a href="#结构体变量" class="headerlink" title="结构体变量"></a><strong>结构体变量</strong></h3><p>不管是静态的还是非静态的, 结构体数据成员都可以和普通变量一样, 不用像类那样接下划线:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UrlTableProperties</span> &#123;</span></div><div class="line">  <span class="built_in">string</span> name;</div><div class="line">  <span class="keyword">int</span> num_entries;</div><div class="line">  <span class="keyword">static</span> Pool&lt;UrlTableProperties&gt;* pool;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<h2 id="2-4-常量命名"><a href="#2-4-常量命名" class="headerlink" title="2.4 常量命名"></a>2.4 常量命名</h2><h4 id="总述-4"><a href="#总述-4" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>声明为 constexpr 或 const 的变量, 或在程序运行期间其值始终保持不变的, 命名时以 “k” 开头, 大小写混合. 例如:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TableInfo</span> &#123;</span></div><div class="line">  ...</div><div class="line"> <span class="keyword">private</span>:</div><div class="line">  <span class="built_in">string</span> table_name_;  <span class="comment">// 好 - 后加下划线.</span></div><div class="line">  <span class="built_in">string</span> tablename_;   <span class="comment">// 好.</span></div><div class="line">  <span class="keyword">static</span> Pool&lt;TableInfo&gt;* pool_;  <span class="comment">// 好.</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="结构体变量"><a href="#结构体变量" class="headerlink" title="结构体变量"></a><strong>结构体变量</strong></h3><p>不管是静态的还是非静态的, 结构体数据成员都可以和普通变量一样, 不用像类那样接下划线:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UrlTableProperties</span> &#123;</span></div><div class="line">  <span class="built_in">string</span> name;</div><div class="line">  <span class="keyword">int</span> num_entries;</div><div class="line">  <span class="keyword">static</span> Pool&lt;UrlTableProperties&gt;* pool;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h2 id="常量命名"><a href="#常量命名" class="headerlink" title="常量命名"></a>常量命名</h2><h4 id="总述-4"><a href="#总述-4" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>声明为 constexpr 或 const 的变量, 或在程序运行期间其值始终保持不变的, 命名时以 “k” 开头, 大小写混合. 例如:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kDaysInAWeek = <span class="number">7</span>;</div></pre></td></tr></table></figure>
 <h4 id="说明-4"><a href="#说明-4" class="headerlink" title="说明"></a><strong>说明</strong></h4><p><strong>所有具有静态存储类型的变量</strong> (例如静态变量或全局变量, 参见 存储类型) 都应当以此方式命名. 对于其他存储类型的变量, 如自动变量等, 这条规则是可选的. 如果不采用这条规则, 就按照一般的变量命名规则.</p>
-<h2 id="2-5-函数命名"><a href="#2-5-函数命名" class="headerlink" title="2.5 函数命名"></a>2.5 函数命名</h2><h4 id="总述-5"><a href="#总述-5" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>常规函数使用大小写混合, 取值和设值函数则要求与变量名匹配: <code>MyExcitingFunction()</code>,<code>MyExcitingMethod()</code>, <code>my_exciting_member_variable()</code>, <code>set_my_exciting_member_variable()</code>.</p>
+<h2 id="函数命名"><a href="#函数命名" class="headerlink" title="函数命名"></a>函数命名</h2><h4 id="总述-5"><a href="#总述-5" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>常规函数使用大小写混合, 取值和设值函数则要求与变量名匹配:<code>MyExcitingFunction()</code>,<code>MyExcitingMethod()</code>,<code>my_exciting_member_variable()</code>,<code>set_my_exciting_member_variable()</code>.</p>
 <h4 id="说明-5"><a href="#说明-5" class="headerlink" title="说明"></a><strong>说明</strong></h4><p>一般来说, 函数名的每个单词首字母大写 (即 “驼峰变量名” 或 “帕斯卡变量名”), 没有下划线. 对于首字母缩写的单词, 更倾向于将它们视作一个单词进行首字母大写 (例如, 写作 <code>StartRpc()</code> 而非 <code>StartRPC()</code>).</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">AddTableEntry()</div><div class="line">DeleteUrl()</div><div class="line">OpenFileOrDie()</div></pre></td></tr></table></figure>
 <p>(同样的命名规则同时适用于类作用域与命名空间作用域的常量, 因为它们是作为 API 的一部分暴露对外的, 因此应当让它们看起来像是一个函数, 因为在这时, 它们实际上是一个对象而非函数的这一事实对外不过是一个无关紧要的实现细节.)</p>
