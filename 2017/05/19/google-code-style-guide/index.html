@@ -1,0 +1,718 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="google style guide," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. 函数2. 命名约定2.1 通用命名规则总述函数命名, 变量命名, 文件命名要有描述性; 少用缩写. 说明尽可能使用描述性的命名, 别心疼空间, 毕竟相比之下让代码易于新读者理解更重要. 不要用只有项目开发者能理解的缩写, 也不要通过砍掉几个字母来缩写单词. 1234int price_count_reader;    // 无缩写int num_errors;            // &quot;">
+<meta name="keywords" content="google style guide">
+<meta property="og:type" content="article">
+<meta property="og:title" content="google code style guide">
+<meta property="og:url" content="http://yoursite.com/2017/05/19/google-code-style-guide/index.html">
+<meta property="og:site_name" content="Sprout&#39;s Blog">
+<meta property="og:description" content="1. 函数2. 命名约定2.1 通用命名规则总述函数命名, 变量命名, 文件命名要有描述性; 少用缩写. 说明尽可能使用描述性的命名, 别心疼空间, 毕竟相比之下让代码易于新读者理解更重要. 不要用只有项目开发者能理解的缩写, 也不要通过砍掉几个字母来缩写单词. 1234int price_count_reader;    // 无缩写int num_errors;            // &quot;">
+<meta property="og:updated_time" content="2017-06-01T02:55:54.302Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="google code style guide">
+<meta name="twitter:description" content="1. 函数2. 命名约定2.1 通用命名规则总述函数命名, 变量命名, 文件命名要有描述性; 少用缩写. 说明尽可能使用描述性的命名, 别心疼空间, 毕竟相比之下让代码易于新读者理解更重要. 不要用只有项目开发者能理解的缩写, 也不要通过砍掉几个字母来缩写单词. 1234int price_count_reader;    // 无缩写int num_errors;            // &quot;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/19/google-code-style-guide/"/>
+
+
+
+
+
+  <title>google code style guide | Sprout's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sprout's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/19/google-code-style-guide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jianfan He">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://wx1.sinaimg.cn/mw1024/9f374deegy1fg3jeb0byqj20680683yn.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sprout's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">google code style guide</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-19T20:41:03+08:00">
+                2017-05-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-函数"><a href="#1-函数" class="headerlink" title="1. 函数"></a>1. 函数</h1><h1 id="2-命名约定"><a href="#2-命名约定" class="headerlink" title="2. 命名约定"></a>2. 命名约定</h1><h2 id="2-1-通用命名规则"><a href="#2-1-通用命名规则" class="headerlink" title="2.1 通用命名规则"></a>2.1 通用命名规则</h2><h4 id="总述"><a href="#总述" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>函数命名, 变量命名, 文件命名要有描述性; 少用缩写.</p>
+<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a><strong>说明</strong></h4><p>尽可能使用描述性的命名, 别心疼空间, 毕竟相比之下让代码易于新读者理解更重要. 不要用只有项目开发者能理解的缩写, 也不要通过砍掉几个字母来缩写单词.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> price_count_reader;    <span class="comment">// 无缩写</span></div><div class="line"><span class="keyword">int</span> num_errors;            <span class="comment">// "num" 是一个常见的写法</span></div><div class="line"><span class="keyword">int</span> num_dns_connections;   <span class="comment">// 人人都知道 "DNS" 是什么</span></div><div class="line"><span class="keyword">int</span> n;                     <span class="comment">// 毫无意义.</span></div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> nerr;                  <span class="comment">// 含糊不清的缩写.</span></div><div class="line"><span class="keyword">int</span> n_comp_conns;          <span class="comment">// 含糊不清的缩写.</span></div><div class="line"><span class="keyword">int</span> wgc_connections;       <span class="comment">// 只有贵团队知道是什么意思.</span></div><div class="line"><span class="keyword">int</span> pc_reader;             <span class="comment">// "pc" 有太多可能的解释了.</span></div><div class="line"><span class="keyword">int</span> cstmr_id;              <span class="comment">// 删减了若干字母.`</span></div></pre></td></tr></table></figure>
+<p>注意, 一些特定的广为人知的缩写是允许的, 例如用 i 表示迭代变量和用 T 表示模板参数.</p>
+<p>模板参数的命名应当遵循对应的分类: 类型模板参数应当遵循 类型命名 的规则, 而非类型模板应当遵循 变量命名 的规则.</p>
+<h2 id="2-2-文件命名"><a href="#2-2-文件命名" class="headerlink" title="2.2 文件命名"></a>2.2 文件命名</h2><h4 id="总述-1"><a href="#总述-1" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>文件名要全部小写, 可以包含下划线 (<code>_</code>) 或连字符 (<code>-</code>), 依照项目的约定. 如果没有约定, 那么 “<code>_</code>” 更好.</p>
+<h4 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a><strong>说明</strong></h4><p>可接受的文件命名示例:</p>
+<ul>
+<li><code>my_useful_class.cc</code></li>
+<li><code>my-useful-class.cc</code></li>
+<li><code>myusefulclass.cc</code></li>
+<li><code>muusefulclass_test.cc // _unittest 和 _regtest 已弃用.</code></li>
+</ul>
+<p>C++ 文件要以 <code>.cc</code> 结尾, 头文件以 <code>.h</code> 结尾. 专门插入文本的文件则以 <code>.inc</code> 结尾, 参见 头文件自足.</p>
+<p>不要使用已经存在于 <code>/usr/include</code> 下的文件名 (Yang.Y 注: 即编译器搜索系统头文件的路径), 如 <code>db.h</code>.</p>
+<p>通常应尽量让文件名更加明确. <code>http_server_logs.h</code> 就比 <code>logs.h</code> 要好. 定义类时文件名一般成对出现, 如 <code>foo_bar.h</code> 和 <code>foo_bar.cc</code>, 对应于类 <code>FooBar</code>.</p>
+<p>内联函数必须放在 <code>.h</code> 文件中. 如果内联函数比较短, 就直接放在 <code>.h</code> 中.</p>
+<h2 id="2-2-类型命名"><a href="#2-2-类型命名" class="headerlink" title="2.2 类型命名"></a>2.2 类型命名</h2><h4 id="总述-2"><a href="#总述-2" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>类型名称的每个单词首字母均大写, 不包含下划线: <code>MyExcitingClass</code>, <code>MyExcitingEnum</code>.</p>
+<h4 id="说明-2"><a href="#说明-2" class="headerlink" title="说明"></a><strong>说明</strong></h4><p>所有类型命名 —— 类, 结构体, 类型定义 (typedef), 枚举, 类型模板参数 —— 均使用相同约定, 即以大写字母开始, <strong>每个单词首字母均大写, 不包含下划线</strong>. 例如:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 类和结构体</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UrlTable</span> &#123;</span> ...</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UrlTableTester</span> &#123;</span> ...</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UrlTableProperties</span> &#123;</span> ...</div><div class="line"></div><div class="line"><span class="comment">// 类型定义</span></div><div class="line"><span class="keyword">typedef</span> hash_map&lt;UrlTableProperties *, <span class="built_in">string</span>&gt; PropertiesMap;</div><div class="line"></div><div class="line"><span class="comment">// using 别名</span></div><div class="line"><span class="keyword">using</span> PropertiesMap = hash_map&lt;UrlTableProperties *, <span class="built_in">string</span>&gt;;</div><div class="line"></div><div class="line"><span class="comment">// 枚举</span></div><div class="line"><span class="keyword">enum</span> UrlTableErrors &#123; ...</div></pre></td></tr></table></figure>
+<h2 id="2-3-变量命名"><a href="#2-3-变量命名" class="headerlink" title="2.3 变量命名"></a>2.3 变量命名</h2><h4 id="总述-3"><a href="#总述-3" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>变量 (包括函数参数) 和数据成员名一律小写, 单词之间用下划线连接. 类的成员变量以下划线结尾, 但结构体的就不用, 如: <code>a_local_variable</code>, <code>a_struct_data_member</code>, <code>a_class_data_member_</code>.</p>
+<h4 id="说明-3"><a href="#说明-3" class="headerlink" title="说明"></a><strong>说明</strong></h4><h3 id="普通变量命名"><a href="#普通变量命名" class="headerlink" title="普通变量命名"></a><strong>普通变量命名</strong></h3><p>举例:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">string</span> table_name;  <span class="comment">// 好 - 用下划线.</span></div><div class="line"><span class="built_in">string</span> tablename;   <span class="comment">// 好 - 全小写.</span></div><div class="line"></div><div class="line"><span class="built_in">string</span> tableName;  <span class="comment">// 差 - 混合大小写</span></div></pre></td></tr></table></figure>
+<h3 id="类数据成员"><a href="#类数据成员" class="headerlink" title="类数据成员"></a><strong>类数据成员</strong></h3><p>不管是静态的还是非静态的, 类数据成员都可以和普通变量一样, 但要接下划线.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TableInfo</span> &#123;</span></div><div class="line">  ...</div><div class="line"> <span class="keyword">private</span>:</div><div class="line">  <span class="built_in">string</span> table_name_;  <span class="comment">// 好 - 后加下划线.</span></div><div class="line">  <span class="built_in">string</span> tablename_;   <span class="comment">// 好.</span></div><div class="line">  <span class="keyword">static</span> Pool&lt;TableInfo&gt;* pool_;  <span class="comment">// 好.</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="结构体变量"><a href="#结构体变量" class="headerlink" title="结构体变量"></a><strong>结构体变量</strong></h3><p>不管是静态的还是非静态的, 结构体数据成员都可以和普通变量一样, 不用像类那样接下划线:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UrlTableProperties</span> &#123;</span></div><div class="line">  <span class="built_in">string</span> name;</div><div class="line">  <span class="keyword">int</span> num_entries;</div><div class="line">  <span class="keyword">static</span> Pool&lt;UrlTableProperties&gt;* pool;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h2 id="2-4-常量命名"><a href="#2-4-常量命名" class="headerlink" title="2.4 常量命名"></a>2.4 常量命名</h2><h4 id="总述-4"><a href="#总述-4" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>声明为 constexpr 或 const 的变量, 或在程序运行期间其值始终保持不变的, 命名时以 “k” 开头, 大小写混合. 例如:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kDaysInAWeek = <span class="number">7</span>;</div></pre></td></tr></table></figure>
+<h4 id="说明-4"><a href="#说明-4" class="headerlink" title="说明"></a><strong>说明</strong></h4><p><strong>所有具有静态存储类型的变量</strong> (例如静态变量或全局变量, 参见 存储类型) 都应当以此方式命名. 对于其他存储类型的变量, 如自动变量等, 这条规则是可选的. 如果不采用这条规则, 就按照一般的变量命名规则.</p>
+<h2 id="2-5-函数命名"><a href="#2-5-函数命名" class="headerlink" title="2.5 函数命名"></a>2.5 函数命名</h2><h4 id="总述-5"><a href="#总述-5" class="headerlink" title="总述"></a><strong>总述</strong></h4><p>常规函数使用大小写混合, 取值和设值函数则要求与变量名匹配: <code>MyExcitingFunction()</code>,<code>MyExcitingMethod()</code>, <code>my_exciting_member_variable()</code>, <code>set_my_exciting_member_variable()</code>.</p>
+<h4 id="说明-5"><a href="#说明-5" class="headerlink" title="说明"></a><strong>说明</strong></h4><p>一般来说, 函数名的每个单词首字母大写 (即 “驼峰变量名” 或 “帕斯卡变量名”), 没有下划线. 对于首字母缩写的单词, 更倾向于将它们视作一个单词进行首字母大写 (例如, 写作 <code>StartRpc()</code> 而非 <code>StartRPC()</code>).</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">AddTableEntry()</div><div class="line">DeleteUrl()</div><div class="line">OpenFileOrDie()</div></pre></td></tr></table></figure>
+<p>(同样的命名规则同时适用于类作用域与命名空间作用域的常量, 因为它们是作为 API 的一部分暴露对外的, 因此应当让它们看起来像是一个函数, 因为在这时, 它们实际上是一个对象而非函数的这一事实对外不过是一个无关紧要的实现细节.)</p>
+<p>取值和设值函数的命名与变量一致. 一般来说它们的名称与实际的成员变量对应, 但并不强制要求. 例如 <code>int count()</code> 与 <code>void set_count(int count)</code>.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/google-style-guide/" rel="tag"># google style guide</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/19/TCP/" rel="next" title="TCP">
+                <i class="fa fa-chevron-left"></i> TCP
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/19/hdu-1166/" rel="prev" title="hdu-1166">
+                hdu-1166 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://wx1.sinaimg.cn/mw1024/9f374deegy1fg3jeb0byqj20680683yn.jpg"
+               alt="Jianfan He" />
+          <p class="site-author-name" itemprop="name">Jianfan He</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-函数"><span class="nav-number">1.</span> <span class="nav-text">1. 函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-命名约定"><span class="nav-number">2.</span> <span class="nav-text">2. 命名约定</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-通用命名规则"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 通用命名规则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#总述"><span class="nav-number">2.1.0.1.</span> <span class="nav-text">总述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#说明"><span class="nav-number">2.1.0.2.</span> <span class="nav-text">说明</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-文件命名"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 文件命名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#总述-1"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">总述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#说明-1"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">说明</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-类型命名"><span class="nav-number">2.3.</span> <span class="nav-text">2.2 类型命名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#总述-2"><span class="nav-number">2.3.0.1.</span> <span class="nav-text">总述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#说明-2"><span class="nav-number">2.3.0.2.</span> <span class="nav-text">说明</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-变量命名"><span class="nav-number">2.4.</span> <span class="nav-text">2.3 变量命名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#总述-3"><span class="nav-number">2.4.0.1.</span> <span class="nav-text">总述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#说明-3"><span class="nav-number">2.4.0.2.</span> <span class="nav-text">说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#普通变量命名"><span class="nav-number">2.4.1.</span> <span class="nav-text">普通变量命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类数据成员"><span class="nav-number">2.4.2.</span> <span class="nav-text">类数据成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体变量"><span class="nav-number">2.4.3.</span> <span class="nav-text">结构体变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-常量命名"><span class="nav-number">2.5.</span> <span class="nav-text">2.4 常量命名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#总述-4"><span class="nav-number">2.5.0.1.</span> <span class="nav-text">总述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#说明-4"><span class="nav-number">2.5.0.2.</span> <span class="nav-text">说明</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-函数命名"><span class="nav-number">2.6.</span> <span class="nav-text">2.5 函数命名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#总述-5"><span class="nav-number">2.6.0.1.</span> <span class="nav-text">总述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#说明-5"><span class="nav-number">2.6.0.2.</span> <span class="nav-text">说明</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jianfan He</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
