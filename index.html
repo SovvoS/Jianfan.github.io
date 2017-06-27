@@ -251,6 +251,246 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/27/poj-1088/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jianfan He">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://wx1.sinaimg.cn/mw1024/9f374deegy1fg3jeb0byqj20680683yn.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sprout's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/27/poj-1088/" itemprop="url">poj-1088</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-27T13:02:36+08:00">
+                2017-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p>题目链接: <a href="http://poj.org/problem?id=1088" target="_blank" rel="external">http://poj.org/problem?id=1088</a></p>
+</li>
+<li><p>题目大意：见题目描述</p>
+</li>
+<li><p>思路： dp[x][y] = max(dp[x-1][y], dp[x][y-1], dp[x+1][y], dp[x],[y+1]) + 1</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kMaxN = <span class="number">101</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> kDp[kMaxN][kMaxN];</div><div class="line"><span class="keyword">int</span> kArr[kMaxN][kMaxN];</div><div class="line"><span class="keyword">int</span> kN, kM;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kDx[] = &#123;<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kDy[] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>&#125;;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Ok</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> p_x, <span class="keyword">int</span> p_y )</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(x &gt;= <span class="number">0</span> &amp;&amp; x &lt; kN &amp;&amp; y &gt;= <span class="number">0</span> &amp;&amp; y &lt;kM &amp;&amp; kArr[p_x][p_y] &gt; kArr[x][y])&#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">Dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(kDp[x][y] != <span class="number">-1</span>)</div><div class="line">        <span class="keyword">return</span> kDp[x][y];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)&#123;</div><div class="line">        <span class="keyword">int</span> nx = x + kDx[i];</div><div class="line">        <span class="keyword">int</span> ny = y + kDy[i];</div><div class="line">        <span class="keyword">if</span>(Ok(nx, ny, x, y))&#123;</div><div class="line">            kDp[x][y] = max(kDp[x][y], Dfs(nx, ny) + <span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> kDp[x][y] == <span class="number">-1</span> ? <span class="number">0</span> : kDp[x][y];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;kN&gt;&gt;kM)&#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kN; ++i)&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; kM; ++j)&#123;</div><div class="line">                <span class="built_in">cin</span>&gt;&gt;kArr[i][j];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">        <span class="built_in">memset</span>(kDp, <span class="number">-1</span>, <span class="keyword">sizeof</span>(kDp));</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kN; ++i)&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; kM; ++j)&#123;</div><div class="line">                <span class="keyword">if</span>(kDp[i][j] == <span class="number">-1</span>)</div><div class="line">                &#123;</div><div class="line">                    kDp[i][j] = Dfs(i, j);</div><div class="line">                &#125;</div><div class="line">                res = max(res, kDp[i][j]);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;res+<span class="number">1</span>&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/20/poj-2533-LIS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jianfan He">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://wx1.sinaimg.cn/mw1024/9f374deegy1fg3jeb0byqj20680683yn.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sprout's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/20/poj-2533-LIS/" itemprop="url">poj-2533(LIS)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-20T15:27:16+08:00">
+                2017-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p>题目链接: <a href="http://poj.org/problem?id=1458" target="_blank" rel="external">http://poj.org/problem?id=1458</a></p>
+</li>
+<li><p>题目大意: 最长递增子序列(Longest Increasing Subsquence)</p>
+</li>
+<li><p>思路: <code>DP[i]</code>表示以A[i]结尾的LIS</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kMaxN = <span class="number">1001</span>;</div><div class="line"><span class="keyword">int</span> kArr[kMaxN];</div><div class="line"><span class="keyword">int</span> kDp[kMaxN];</div><div class="line"><span class="keyword">int</span> kN;</div><div class="line"><span class="comment">/*</span></div><div class="line">* dp[i] 表示 a[i] 结尾的 最大 LIS</div><div class="line">* dp[i] = max(dp[i], dp[j] + 1);</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">Solve</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="built_in">memset</span>(kDp, <span class="number">0</span>, <span class="keyword">sizeof</span>(kDp));</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kN; ++i)&#123;</div><div class="line">        kDp[i] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; kN; ++i)&#123; <span class="comment">/// 以a[i]结尾的</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; ++j)&#123;</div><div class="line">            <span class="keyword">if</span>(kArr[i] &gt; kArr[j])&#123;</div><div class="line">                kDp[i] = max(kDp[i], kDp[j] + <span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kN; ++i)&#123;</div><div class="line">        ret = max(kDp[i], ret);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> ret;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; kN)&#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kN; ++i)</div><div class="line">            <span class="built_in">cin</span>&gt;&gt;kArr[i];</div><div class="line">        <span class="keyword">int</span> ret = Solve();</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;ret&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/19/poj-1458-LCS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1243,246 +1483,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/30/hdu-5475/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jianfan He">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://wx1.sinaimg.cn/mw1024/9f374deegy1fg3jeb0byqj20680683yn.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sprout's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/30/hdu-5475/" itemprop="url">hdu-5475</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-30T16:57:52+08:00">
-                2017-05-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p>题目链接: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=5475" target="_blank" rel="external">http://acm.hdu.edu.cn/showproblem.php?pid=5475</a></p>
-</li>
-<li><p>题目大意： 有两种操作 1: x * value, 2: x / value[n] 除以第n次的操作数, x初始为1</p>
-</li>
-<li><p>思路： 除以第n次的值就是将其变为1， 线段树求区间乘积， 点更新</p>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">long</span> <span class="keyword">long</span> kMaxO = <span class="number">100001</span>;</div><div class="line"><span class="keyword">long</span> <span class="keyword">long</span> kT, kQ, kMod;</div><div class="line"><span class="keyword">long</span> <span class="keyword">long</span> kOp, kX, kN;</div><div class="line"></div><div class="line"><span class="keyword">long</span> <span class="keyword">long</span> kMul[kMaxO&lt;&lt;<span class="number">2</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">PushUp</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    kMul[rt] = ((kMul[rt&lt;&lt;<span class="number">1</span>] % kMod) * (kMul[rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>] % kMod))% kMod;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">BuildTree</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> l, <span class="keyword">long</span> <span class="keyword">long</span> r, <span class="keyword">long</span> <span class="keyword">long</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(l == r)</div><div class="line">    &#123;</div><div class="line">        kMul[rt] = <span class="number">1</span>;</div><div class="line">        <span class="keyword">return</span> ;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">long</span> <span class="keyword">long</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</div><div class="line">    BuildTree(l, mid, rt&lt;&lt;<span class="number">1</span>);</div><div class="line">    BuildTree(mid + <span class="number">1</span>, r, rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>);</div><div class="line">    PushUp(rt);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">QueryTree</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> left, <span class="keyword">long</span> <span class="keyword">long</span> right, <span class="keyword">long</span> <span class="keyword">long</span> l, <span class="keyword">long</span> <span class="keyword">long</span> r, <span class="keyword">long</span> <span class="keyword">long</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(left &lt;= l &amp;&amp; right &lt;= r)</div><div class="line">        <span class="keyword">return</span> kMul[rt];</div><div class="line">    <span class="keyword">long</span> <span class="keyword">long</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</div><div class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ret = <span class="number">1</span>;</div><div class="line">    <span class="keyword">if</span>(left &lt;= mid)</div><div class="line">        ret *= QueryTree(left, right, l, mid, rt &lt;&lt; <span class="number">1</span>);</div><div class="line">    <span class="keyword">if</span>(right &gt; mid)</div><div class="line">        ret *= QueryTree(left, right, mid+<span class="number">1</span>, r, rt &lt;&lt; <span class="number">1</span> | <span class="number">1</span>);</div><div class="line">    <span class="keyword">return</span> ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">UpdateTree</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> loc, <span class="keyword">long</span> <span class="keyword">long</span> val, <span class="keyword">long</span> <span class="keyword">long</span> l, <span class="keyword">long</span> <span class="keyword">long</span> r, <span class="keyword">long</span> <span class="keyword">long</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(l == r)&#123;</div><div class="line">        kMul[rt] = val % kMod;</div><div class="line">        <span class="keyword">return</span> ;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">long</span> <span class="keyword">long</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(loc &lt;= mid)</div><div class="line">        UpdateTree(loc, val, l, mid, rt &lt;&lt; <span class="number">1</span>);</div><div class="line">    <span class="keyword">else</span></div><div class="line">        UpdateTree(loc, val, mid + <span class="number">1</span>, r, rt &lt;&lt; <span class="number">1</span> | <span class="number">1</span>);</div><div class="line"></div><div class="line">    PushUp(rt);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;kT);</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> case_id = <span class="number">1</span>; case_id &lt;= kT; ++case_id)</div><div class="line">    &#123;</div><div class="line">        kX = <span class="number">1</span>;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>, &amp;kQ, &amp;kMod);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Case #%lld:\n"</span>, case_id);</div><div class="line">        BuildTree(<span class="number">1</span>, kQ, <span class="number">1</span>);</div><div class="line"></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i = <span class="number">1</span>; i &lt;= kQ; ++i)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;kOp, &amp;kN);</div><div class="line">            <span class="keyword">if</span>(kOp == <span class="number">1</span>)</div><div class="line">                UpdateTree(i, kN, <span class="number">1</span>, kQ, <span class="number">1</span>);</div><div class="line">            <span class="keyword">else</span></div><div class="line">                UpdateTree(kN, <span class="number">1</span>, <span class="number">1</span>, kQ, <span class="number">1</span>);</div><div class="line">            kX = kMul[<span class="number">1</span>];</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, kX);</div><div class="line"><span class="comment">//            Debug();</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/26/hdu-2795/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jianfan He">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://wx1.sinaimg.cn/mw1024/9f374deegy1fg3jeb0byqj20680683yn.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sprout's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/26/hdu-2795/" itemprop="url">hdu-2795</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-26T15:36:18+08:00">
-                2017-05-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p>题目链接: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2795" target="_blank" rel="external">http://acm.hdu.edu.cn/showproblem.php?pid=2795</a></p>
-</li>
-<li><p>题目大意: 给你一个H<em>W的黑板，在上面贴海报，但是有一个要求，每次只能贴最上面的且靠右的地方，每张海报都是1</em>W的，不能覆盖，问每张海报贴在第几行</p>
-</li>
-<li><p>思路：线段树询问区间最大值，因为N只有200000， 所以按照H来建树</p>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kMaxN = <span class="number">200001</span>;</div><div class="line"><span class="keyword">int</span> kMax[kMaxN&lt;&lt;<span class="number">2</span>];</div><div class="line"></div><div class="line"><span class="keyword">int</span> kN, kW, kH;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">PushUp</span><span class="params">(<span class="keyword">int</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    kMax[rt] = max(kMax[rt&lt;&lt;<span class="number">1</span>], kMax[rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">BuildTree</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(l == r)&#123;</div><div class="line">        kMax[rt] = kW;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</div><div class="line">    BuildTree(l, mid, rt&lt;&lt;<span class="number">1</span>);</div><div class="line">    BuildTree(mid+<span class="number">1</span>, r, rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>);</div><div class="line">    PushUp(rt);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">QueryTree</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rt)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(kMax[rt] &lt; w)</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    <span class="keyword">if</span>(l == r)</div><div class="line">    &#123;</div><div class="line">        kMax[rt] -= w;</div><div class="line">        <span class="keyword">return</span> l;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</div><div class="line">    <span class="keyword">int</span> ret = kMaxN;</div><div class="line">    <span class="keyword">if</span>(kMax[rt&lt;&lt;<span class="number">1</span>] &gt;= w)</div><div class="line">        ret = min(ret, QueryTree(w, l, (l+r)&gt;&gt;<span class="number">1</span>, rt&lt;&lt;<span class="number">1</span>));</div><div class="line">    <span class="keyword">else</span></div><div class="line">        ret = min(ret, QueryTree(w, mid + <span class="number">1</span>, r, rt&lt;&lt;<span class="number">1</span>|<span class="number">1</span>));</div><div class="line">    PushUp(rt);</div><div class="line">    <span class="keyword">return</span> ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;kH,&amp;kW, &amp;kN)!=EOF)</div><div class="line">    &#123;</div><div class="line">        kH = min(kN, kH);</div><div class="line">        BuildTree(<span class="number">1</span>, kH, <span class="number">1</span>);</div><div class="line">        <span class="keyword">int</span> w;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kN; ++i)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;w);</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, QueryTree(w, <span class="number">1</span>, kH, <span class="number">1</span>));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1532,7 +1532,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
