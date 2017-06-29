@@ -251,6 +251,126 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/29/poj-1753/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jianfan He">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://wx1.sinaimg.cn/mw1024/9f374deegy1fg3jeb0byqj20680683yn.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sprout's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/29/poj-1753/" itemprop="url">poj-1753</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-29T14:21:52+08:00">
+                2017-06-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p>题目链接: <a href="http://poj.org/problem?id=1753" target="_blank" rel="external">http://poj.org/problem?id=1753</a></p>
+</li>
+<li><p>题目大意: 翻转棋，反转一个棋，周围的棋子也会反转</p>
+</li>
+<li><p>思路: bfs + 位运算</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kMaxN = <span class="number">1</span> &lt;&lt; <span class="number">16</span>;</div><div class="line"></div><div class="line"><span class="keyword">bool</span> kVis[kMaxN];</div><div class="line"></div><div class="line"><span class="keyword">char</span> kBoard[<span class="number">5</span>][<span class="number">5</span>];</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Location</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> step;</div><div class="line">    <span class="keyword">int</span> val;</div><div class="line">    Location(<span class="keyword">int</span> s, <span class="keyword">int</span> v) : step(s), val(v)&#123;&#125;</div><div class="line">    Location(<span class="keyword">char</span> b[<span class="number">5</span>][<span class="number">5</span>])&#123;</div><div class="line">        step = <span class="number">0</span>;</div><div class="line">        val = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> mul = <span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">3</span>; i &gt;= <span class="number">0</span>; --i)&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">3</span>; j &gt;= <span class="number">0</span>; --j)&#123;</div><div class="line">                <span class="keyword">if</span>(b[i][j] == <span class="string">'b'</span>)&#123;</div><div class="line">                    val += mul;</div><div class="line">                &#125;</div><div class="line">                mul *= <span class="number">2</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        step = <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kBitOp[<span class="number">16</span>] = &#123;</div><div class="line">    <span class="number">51200</span>, <span class="number">58368</span>, <span class="number">29184</span>, <span class="number">12544</span>,</div><div class="line">    <span class="number">35968</span>, <span class="number">20032</span>, <span class="number">10016</span>, <span class="number">4880</span>,</div><div class="line">    <span class="number">2248</span>, <span class="number">1252</span>, <span class="number">626</span>, <span class="number">305</span>,</div><div class="line">    <span class="number">140</span>, <span class="number">78</span>, <span class="number">39</span>, <span class="number">19</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Solve</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="function">Location <span class="title">loc</span><span class="params">(kBoard)</span></span>;</div><div class="line">    <span class="built_in">memset</span>(kVis, <span class="literal">false</span>, <span class="keyword">sizeof</span>(kVis));</div><div class="line">    kVis[loc.val] = <span class="literal">true</span>;</div><div class="line">    <span class="built_in">queue</span>&lt;Location&gt; que;</div><div class="line">    que.push(loc);</div><div class="line">    <span class="keyword">while</span>(!que.empty())&#123;</div><div class="line">        Location top = que.front();</div><div class="line">        <span class="keyword">if</span>(top.val == <span class="number">0</span> || top.val == (kMaxN<span class="number">-1</span>))&#123;</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,top.step);</div><div class="line">            <span class="keyword">return</span> ;</div><div class="line">        &#125;</div><div class="line">        que.pop();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">16</span>; ++i)&#123;</div><div class="line">            <span class="function">Location <span class="title">next</span><span class="params">(top.step+<span class="number">1</span>, top.val^kBitOp[i])</span></span>;</div><div class="line">            <span class="keyword">if</span>(!kVis[next.val])&#123;</div><div class="line">                kVis[next.val] = <span class="literal">true</span>;</div><div class="line">                que.push(next);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Impossible\n"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%s"</span>,kBoard[<span class="number">0</span>])!=EOF)&#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">4</span>; ++i)&#123;</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%s"</span>, kBoard[i]);</div><div class="line">        &#125;</div><div class="line">        Solve();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/27/hdu-2066/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1317,177 +1437,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/01/cpp11-chapter15-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jianfan He">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://wx1.sinaimg.cn/mw1024/9f374deegy1fg3jeb0byqj20680683yn.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sprout's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/01/cpp11-chapter15-1/" itemprop="url">cpp11-chapter15.1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-01T16:10:17+08:00">
-                2017-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="定义基类和构造函数"><a href="#定义基类和构造函数" class="headerlink" title="定义基类和构造函数"></a>定义基类和构造函数</h2><p><strong>基类通常都应该定义一个虚析构函数， 即使该函数不执行任何实际操作也是如此</strong></p>
-<h3 id="成员函数与继承"><a href="#成员函数与继承" class="headerlink" title="成员函数与继承"></a>成员函数与继承</h3><p>两种成员函数：</p>
-<ul>
-<li><p>基类希望其派生类进行覆盖的函数 （<strong>虚函数</strong>）</p>
-</li>
-<li><p>基类希望派生类直接继承而不改变的函数</p>
-</li>
-</ul>
-<p>当我们用指针或引用调用虚函数时， 该调用将被动态绑定。</p>
-<h3 id="访问控制与继承"><a href="#访问控制与继承" class="headerlink" title="访问控制与继承"></a>访问控制与继承</h3><p><strong>protected:</strong>  基类希望派生类有权访问，同时禁止其他用户访问</p>
-<ol>
-<li><p>什么是虚成员？</p>
-<ul>
-<li>虚成员就是希望派生类覆盖的成员 <strong>（standard： 对于某些函数，基类希望它的派生类各自定义适合自身的版本，此时基类就将这些函数声明成虚函数。</strong></li>
-</ul>
-</li>
-<li>protected访问说明符与private有什么区别？<ul>
-<li>protected 基类和其派生类和其友元能访问</li>
-<li>private 基类和其友元能访问</li>
-</ul>
-</li>
-</ol>
-<h2 id="定义派生类"><a href="#定义派生类" class="headerlink" title="定义派生类"></a>定义派生类</h2><p>派生类必须通过类派生列表明确指出它是从哪个基类继承而来的。</p>
-<h3 id="派生中的虚函数"><a href="#派生中的虚函数" class="headerlink" title="派生中的虚函数"></a>派生中的虚函数</h3><ul>
-<li>派生类经常（但不总是）覆盖它继承的虚函数</li>
-<li>C++11标准孕育派生类显示地注明它使用某个成员函数覆盖了它继承的虚函数。（<strong>具体做法是在形参列表后面、后者在const成员函数的const关键字后面、或者在引用成员函数的引用限定符后面添加一个关键字override</strong>)</li>
-</ul>
-<h3 id="派生类构造函数"><a href="#派生类构造函数" class="headerlink" title="派生类构造函数"></a>派生类构造函数</h3><ul>
-<li><p>派生类对象中含有从基类集成而来的成员，但是派生类并不能直接初始化这些成员，派生类也必须使用几类的构造函数来初始化它的基类部分</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Bulk_quote(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; book, <span class="keyword">double</span> p,</div><div class="line">  <span class="built_in">std</span>::<span class="keyword">size_t</span> qty, <span class="keyword">double</span> disc) :</div><div class="line">  Quote(book, p), min_qty(qty), discount(disc)&#123;&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>首先初始化基类部分， 然后按照声明的顺序依次初始化派生类的成员</strong></p>
-</li>
-</ul>
-<h2 id="继承与静态成员"><a href="#继承与静态成员" class="headerlink" title="继承与静态成员"></a>继承与静态成员</h2><ul>
-<li>基类定义的一个静态成员，则在整个继承体系中之存在该成员的唯一定义</li>
-</ul>
-<h3 id="类型转换与继承"><a href="#类型转换与继承" class="headerlink" title="类型转换与继承"></a>类型转换与继承</h3><p>当我们使用攒在继承关系的类型时，必须将一个变量或其他表达式的 <strong>静态类型</strong> 与该表达式表示对象的 <strong>动态类型</strong> 区分开来。</p>
-<ul>
-<li>静态类型在编译时总是已知的，是变量声明时或表达式生成的类型</li>
-<li>动态类型是变量或表达式的内存中的对象类型 ，在运行的时候才可知</li>
-</ul>
-<ol>
-<li>给出静态类型和动态类型的定义？<ul>
-<li>表达式的静态类型在编译时总是已知的，它是变量声明时的类型或表达式生成的类型。动态类型则是变量或表达式表示的内存中的对象的类型。动态类型直到运行时才可知。</li>
-</ul>
-</li>
-<li>什么情况下静态类型和动态类型可能不同？举例3个。<ul>
-<li>基类的指针或引用的静态类型可能与其动态类型不一致。</li>
-</ul>
-</li>
-</ol>
-<h2 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h2><h3 id="对虚函数的调用可能在运行时才被解析"><a href="#对虚函数的调用可能在运行时才被解析" class="headerlink" title="对虚函数的调用可能在运行时才被解析"></a>对虚函数的调用可能在运行时才被解析</h3><ul>
-<li><strong>动态绑定只有我们通过指针或者引用调用虚函数时才会发生</strong></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1532,7 +1486,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1545,7 +1499,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
