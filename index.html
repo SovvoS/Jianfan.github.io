@@ -251,6 +251,246 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/08/HYSBZ-1085/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jianfan He">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://wx1.sinaimg.cn/mw1024/9f374deegy1fg3jeb0byqj20680683yn.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sprout's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/08/HYSBZ-1085/" itemprop="url">HYSBZ-1085</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-08T10:25:47+08:00">
+                2017-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p>题目链接: <a href="http://www.lydsy.com/JudgeOnline/problem.php?id=1085" target="_blank" rel="external">http://www.lydsy.com/JudgeOnline/problem.php?id=1085</a></p>
+</li>
+<li><p>题目大意：求最少到达目标条件的步数</p>
+</li>
+<li><p>思路：估价函数为不在当前位置的总数减去一然后IDA*搜索一下</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kDx[] = &#123;<span class="number">-2</span>, <span class="number">2</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">-2</span>, <span class="number">2</span>, <span class="number">-1</span>, <span class="number">1</span>&#125;;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kDy[] = &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-2</span>, <span class="number">-2</span>&#125;;</div><div class="line"></div><div class="line"><span class="keyword">char</span> kBoard[<span class="number">6</span>][<span class="number">6</span>];</div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> kAns[<span class="number">6</span>][<span class="number">6</span>] = &#123;<span class="string">"11111"</span>,</div><div class="line">                   <span class="string">"01111"</span>,</div><div class="line">                   <span class="string">"00*11"</span>,</div><div class="line">                   <span class="string">"00001"</span>,</div><div class="line">                   <span class="string">"00000"</span>&#125;;</div><div class="line"><span class="keyword">int</span> kT, kRes;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">kH</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i)&#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">5</span>; ++j)&#123;</div><div class="line">            <span class="keyword">if</span>(kBoard[i][j] != kAns[i][j])&#123;</div><div class="line">               ++res;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">InBoard</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(x &lt; <span class="number">0</span> || x &gt;=<span class="number">5</span> || y &lt; <span class="number">0</span> || y &gt;= <span class="number">5</span>)&#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Input</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i)</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%s"</span>, kBoard[i]);</div><div class="line">    kRes = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i)&#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">5</span>; ++j)&#123;</div><div class="line">            <span class="keyword">if</span>(kBoard[i][j] != kAns[i][j])</div><div class="line">                kRes += <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetXY</span><span class="params">(<span class="keyword">int</span>&amp; x, <span class="keyword">int</span>&amp; y)</span></span>&#123;</div><div class="line">    x = y = <span class="number">-1</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i)&#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">5</span>; ++j)&#123;</div><div class="line">            <span class="keyword">if</span>(kBoard[i][j] == <span class="string">'*'</span>)&#123;</div><div class="line">                x = i, y = j;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(x != <span class="number">-1</span>)<span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Dfs</span><span class="params">(<span class="keyword">int</span> depth)</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> h = kH();</div><div class="line">    <span class="keyword">if</span>(h == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    <span class="keyword">if</span>(h - <span class="number">1</span> + depth &lt;= kRes)&#123;</div><div class="line">        <span class="keyword">int</span> x, y;</div><div class="line">        GetXY(x, y);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; ++i)&#123;</div><div class="line">            <span class="keyword">int</span> nx = x + kDx[i];</div><div class="line">            <span class="keyword">int</span> ny = y + kDy[i];</div><div class="line">            <span class="keyword">if</span>(InBoard(nx, ny))&#123;</div><div class="line">                swap(kBoard[x][y], kBoard[nx][ny]);</div><div class="line">                <span class="keyword">if</span>(Dfs(depth + <span class="number">1</span>))</div><div class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">                swap(kBoard[x][y], kBoard[nx][ny]);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;kT);</div><div class="line">    <span class="keyword">while</span>(kT--)&#123;</div><div class="line">        Input();</div><div class="line">        kRes -= <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>(!Dfs(<span class="number">0</span>) &amp;&amp; kRes &lt;= <span class="number">15</span>)</div><div class="line">            ++kRes;</div><div class="line">        <span class="keyword">if</span>(kRes &lt;= <span class="number">15</span>)</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, kRes);</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="built_in">puts</span>(<span class="string">"-1"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/03/cf-371-c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jianfan He">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://wx1.sinaimg.cn/mw1024/9f374deegy1fg3jeb0byqj20680683yn.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sprout's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/03/cf-371-c/" itemprop="url">cf-371-c</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-03T16:22:15+08:00">
+                2017-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p>题目链接: <a href="http://codeforces.com/contest/371/problem/C" target="_blank" rel="external">http://codeforces.com/contest/371/problem/C</a></p>
+</li>
+<li><p>题目大意: 给你一个字符串表示一个汉堡的组成，你初始有一些材料，然后给你其他材料的价格和你初始有多少钱，最后求最多能做出多少汉堡来</p>
+</li>
+<li><p>思路: 需要花多少钱的函数<code>F(x) = max(0ll,kB*x - kNb)*kPb + max(0ll, kS*x-kNs)*kPs + max(0ll, kC*x - kNc)*kPc</code> 这个函数是一个单调函数，二分即可求出答案，二分注意区间开闭<code>[left, mid), [mid, right)</code>.</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kMaxN = <span class="number">1000001</span>;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</div><div class="line"><span class="keyword">char</span> kStr[kMaxN];</div><div class="line">ll kNb, kNs, kNc;</div><div class="line">ll kPb, kPs, kPc;</div><div class="line"></div><div class="line">ll kMoney;</div><div class="line"></div><div class="line">ll kB, kS, kC;</div><div class="line"></div><div class="line"><span class="function">ll <span class="title">Function</span><span class="params">(ll x)</span></span>&#123;</div><div class="line">     <span class="keyword">return</span> max(<span class="number">0l</span>l,kB*x - kNb)*kPb + max(<span class="number">0l</span>l, kS*x-kNs)*kPs + max(<span class="number">0l</span>l, kC*x - kNc)*kPc;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%s"</span>, kStr)!=EOF)&#123;</div><div class="line">        <span class="keyword">int</span> len = <span class="built_in">strlen</span>(kStr);</div><div class="line">        kB = kS = kC = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i)&#123;</div><div class="line">            <span class="keyword">if</span>(kStr[i] == <span class="string">'B'</span>)&#123;</div><div class="line">                ++kB;</div><div class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(kStr[i] == <span class="string">'S'</span>)&#123;</div><div class="line">                ++kS;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> &#123;</div><div class="line">                ++kC;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">cin</span>&gt;&gt;kNb&gt;&gt;kNs&gt;&gt;kNc;</div><div class="line">        <span class="built_in">cin</span>&gt;&gt;kPb&gt;&gt;kPs&gt;&gt;kPc;</div><div class="line">        <span class="built_in">cin</span>&gt;&gt;kMoney;</div><div class="line">        ll left = <span class="number">0</span>;</div><div class="line">        ll right = <span class="number">10000000000000l</span>l;</div><div class="line">        <span class="keyword">while</span>(left + <span class="number">1</span> &lt; right)&#123;</div><div class="line">            ll mid = (left + right) &gt;&gt; <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span>(Function(mid) &lt;= kMoney)</div><div class="line">                left = mid;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                right = mid;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;left&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/02/hdu-2579/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -327,7 +567,7 @@
 <li><p>思路: 因为k最大为10，那么多开一维来进行标记即可</p>
 </li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kMaxN = <span class="number">100</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> x, y;</div><div class="line">    <span class="keyword">int</span> step;</div><div class="line">    Point(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> s = <span class="number">0</span>) : x(a), y(b), step(s)&#123;&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">int</span> kT, kN, kM;</div><div class="line"><span class="keyword">char</span> kMap[kMaxN][kMaxN];</div><div class="line"><span class="keyword">int</span> kVis[kMaxN][kMaxN][<span class="number">10</span>];</div><div class="line"><span class="keyword">int</span> kSX, kSY, kEX, kEY, kK;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kDx[<span class="number">4</span>] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>&#125;;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kDy[<span class="number">4</span>] = &#123;<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">-1</span>&#125;;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Input</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kN; ++i)&#123;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%s"</span>, kMap[i]);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; kM; ++j)&#123;</div><div class="line">            <span class="keyword">if</span>(kMap[i][j] == <span class="string">'Y'</span>)&#123;</div><div class="line">                kSX = i, kSY = j;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(kMap[i][j] == <span class="string">'G'</span>)&#123;</div><div class="line">                kEX = i, kEY = j;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Ok</span><span class="params">(<span class="keyword">int</span> nx, <span class="keyword">int</span> ny, <span class="keyword">int</span> step)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(nx &gt;= <span class="number">0</span> &amp;&amp; nx &lt; kN &amp;&amp; ny &gt;= <span class="number">0</span> &amp;&amp; ny &lt; kM &amp;&amp; !kVis[nx][ny][step%kK])&#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Bfs</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="function">Point <span class="title">p</span><span class="params">(kSX, kSY)</span></span>;</div><div class="line">    <span class="built_in">queue</span>&lt;Point&gt;que;</div><div class="line">    que.push(p);</div><div class="line">    <span class="built_in">memset</span>(kVis, <span class="literal">false</span>, <span class="keyword">sizeof</span>(kVis));</div><div class="line">    kVis[kSX][kSY][<span class="number">0</span>] = <span class="literal">true</span>;</div><div class="line">    <span class="keyword">while</span>(!que.empty())&#123;</div><div class="line">        Point top = que.front();</div><div class="line">        <span class="keyword">if</span>(top.x == kEX &amp;&amp; top.y == kEY)&#123;</div><div class="line">            <span class="built_in">cout</span>&lt;&lt;top.step&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        que.pop();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)&#123;</div><div class="line">            <span class="keyword">int</span> nx = top.x + kDx[i];</div><div class="line">            <span class="keyword">int</span> ny = top.y + kDy[i];</div><div class="line">            <span class="keyword">int</span> step = top.step + <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span>(Ok(nx, ny, step))&#123;</div><div class="line">                <span class="keyword">if</span>(kMap[nx][ny] == <span class="string">'#'</span> &amp;&amp; step % kK == <span class="number">0</span> )&#123;</div><div class="line">                    kVis[nx][ny][<span class="number">0</span>] = <span class="literal">true</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(kMap[nx][ny] == <span class="string">'#'</span> &amp;&amp; step % kK != <span class="number">0</span>)&#123;</div><div class="line">                    <span class="keyword">continue</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> &#123;</div><div class="line">                    kVis[nx][ny][step % kK] = <span class="literal">true</span>;</div><div class="line">                &#125;</div><div class="line">                que.push(Point(nx, ny, step));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">puts</span>(<span class="string">"Please give me another chance!"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="built_in">cin</span>&gt;&gt;kT;</div><div class="line">    <span class="keyword">while</span>(kT--)&#123;</div><div class="line">        <span class="built_in">cin</span>&gt;&gt;kN&gt;&gt;kM&gt;&gt;kK;</div><div class="line">        Input();</div><div class="line">        Bfs();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kMaxN = <span class="number">100</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> x, y;</div><div class="line">    <span class="keyword">int</span> step;</div><div class="line">    Point(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> s = <span class="number">0</span>) : x(a), y(b), step(s)&#123;&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">int</span> kT, kN, kM;</div><div class="line"><span class="keyword">char</span> kMap[kMaxN][kMaxN];</div><div class="line"><span class="keyword">int</span> kVis[kMaxN][kMaxN][<span class="number">10</span>];</div><div class="line"><span class="keyword">int</span> kSX, kSY, kEX, kEY, kK;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kDx[<span class="number">4</span>] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>&#125;;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kDy[<span class="number">4</span>] = &#123;<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">-1</span>&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Input</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kN; ++i)&#123;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%s"</span>, kMap[i]);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; kM; ++j)&#123;</div><div class="line">            <span class="keyword">if</span>(kMap[i][j] == <span class="string">'Y'</span>)&#123;</div><div class="line">                kSX = i, kSY = j;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(kMap[i][j] == <span class="string">'G'</span>)&#123;</div><div class="line">                kEX = i, kEY = j;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Ok</span><span class="params">(<span class="keyword">int</span> nx, <span class="keyword">int</span> ny, <span class="keyword">int</span> step)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(nx &gt;= <span class="number">0</span> &amp;&amp; nx &lt; kN &amp;&amp; ny &gt;= <span class="number">0</span> &amp;&amp; ny &lt; kM &amp;&amp; !kVis[nx][ny][step%kK])&#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Bfs</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="function">Point <span class="title">p</span><span class="params">(kSX, kSY)</span></span>;</div><div class="line">    <span class="built_in">queue</span>&lt;Point&gt;que;</div><div class="line">    que.push(p);</div><div class="line">    <span class="built_in">memset</span>(kVis, <span class="literal">false</span>, <span class="keyword">sizeof</span>(kVis));</div><div class="line">    kVis[kSX][kSY][<span class="number">0</span>] = <span class="literal">true</span>;</div><div class="line">    <span class="keyword">while</span>(!que.empty())&#123;</div><div class="line">        Point top = que.front();</div><div class="line">        <span class="keyword">if</span>(top.x == kEX &amp;&amp; top.y == kEY)&#123;</div><div class="line">            <span class="built_in">cout</span>&lt;&lt;top.step&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        que.pop();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)&#123;</div><div class="line">            <span class="keyword">int</span> nx = top.x + kDx[i];</div><div class="line">            <span class="keyword">int</span> ny = top.y + kDy[i];</div><div class="line">            <span class="keyword">int</span> step = top.step + <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span>(Ok(nx, ny, step))&#123;</div><div class="line">                <span class="keyword">if</span>(kMap[nx][ny] == <span class="string">'#'</span> &amp;&amp; step % kK == <span class="number">0</span> )&#123;</div><div class="line">                    kVis[nx][ny][<span class="number">0</span>] = <span class="literal">true</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(kMap[nx][ny] == <span class="string">'#'</span> &amp;&amp; step % kK != <span class="number">0</span>)&#123;</div><div class="line">                    <span class="keyword">continue</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> &#123;</div><div class="line">                    kVis[nx][ny][step % kK] = <span class="literal">true</span>;</div><div class="line">                &#125;</div><div class="line">                que.push(Point(nx, ny, step));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">puts</span>(<span class="string">"Please give me another chance!"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="built_in">cin</span>&gt;&gt;kT;</div><div class="line">    <span class="keyword">while</span>(kT--)&#123;</div><div class="line">        <span class="built_in">cin</span>&gt;&gt;kN&gt;&gt;kM&gt;&gt;kK;</div><div class="line">        Input();</div><div class="line">        Bfs();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
           
         
@@ -1202,241 +1442,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/03/vim-operation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jianfan He">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://wx1.sinaimg.cn/mw1024/9f374deegy1fg3jeb0byqj20680683yn.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sprout's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/03/vim-operation/" itemprop="url">vim-operation</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-03T20:47:55+08:00">
-                2017-06-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>—|—|—-</p>
-<p>—|—|—</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/02/cf-812-b/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jianfan He">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://wx1.sinaimg.cn/mw1024/9f374deegy1fg3jeb0byqj20680683yn.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sprout's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/02/cf-812-b/" itemprop="url">cf-812-b</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-02T19:20:09+08:00">
-                2017-06-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p>题目链接: <a href="http://codeforces.com/problemset/problem/812/B" target="_blank" rel="external">http://codeforces.com/problemset/problem/812/B</a></p>
-</li>
-<li><p>题目大意: 一个大楼管理员需要关灯，问最少需要多少时间能关掉所有的灯，只有关掉一层楼的灯才能去下一层楼</p>
-</li>
-<li><p>思路: DP， <code>dp[i][2]</code>, <code>dp[i][0]</code>表示关掉当前楼层的灯且到达最左端的最短时间，<code>dp[i][1]</code>表示关掉当前楼层且到达最右端的最短时间，第一层和最后一层特判。状态转移方程如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dp[i][<span class="number">0</span>] = min(dp[i<span class="number">-1</span>][<span class="number">0</span>] + right*<span class="number">2</span> + <span class="number">1</span>, dp[i<span class="number">-1</span>][<span class="number">1</span>] + M + <span class="number">1</span> + <span class="number">1</span>);</div><div class="line">dp[i][<span class="number">1</span>] = min(dp[i<span class="number">-1</span>][<span class="number">0</span>] + M + <span class="number">1</span> + <span class="number">1</span>, dp[i<span class="number">-1</span>][<span class="number">1</span>] + (M+<span class="number">1</span>-left)*<span class="number">2</span> + <span class="number">1</span>);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>最后取二者最小值</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kMaxN = <span class="number">15</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> kMaxM = <span class="number">102</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> kInfo[kMaxN][kMaxM];</div><div class="line"><span class="keyword">int</span> kHasLightOn[kMaxN];</div><div class="line"><span class="keyword">int</span> kDp[<span class="number">2</span>][<span class="number">2</span>];<span class="comment">//0, 1 left-&gt;left, left-&gt;right, 2 right-&gt;left, right -&gt; right;</span></div><div class="line"><span class="keyword">int</span> kN, kM;</div><div class="line"><span class="keyword">int</span> kLightsNum;</div><div class="line"><span class="keyword">char</span> kStr[kMaxM+<span class="number">1</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Input</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    kLightsNum = <span class="number">0</span>;</div><div class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;kN, &amp;kM);</div><div class="line">    <span class="built_in">memset</span>(kHasLightOn, <span class="number">0</span>, <span class="keyword">sizeof</span>(kHasLightOn));</div><div class="line">    <span class="built_in">memset</span>(kDp, <span class="number">0</span>, <span class="keyword">sizeof</span>(kDp));</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kN; ++i)&#123;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%s"</span>,kStr);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; kM + <span class="number">2</span>; ++j)&#123;</div><div class="line">            <span class="keyword">if</span>(kStr[j] == <span class="string">'0'</span>)</div><div class="line">                kInfo[kN<span class="number">-1</span>-i][j] = <span class="number">0</span>;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                kInfo[kN<span class="number">-1</span>-i][j] = <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span>(kInfo[kN<span class="number">-1</span>-i][j])&#123;</div><div class="line">                ++kHasLightOn[kN<span class="number">-1</span>-i];</div><div class="line">                ++kLightsNum;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">FindRight</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;<span class="built_in">floor</span>)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kM+<span class="number">2</span>; ++i)</div><div class="line">        <span class="keyword">if</span>(kInfo[<span class="built_in">floor</span>][i] == <span class="number">1</span>)</div><div class="line">            ret = i;</div><div class="line">    <span class="keyword">return</span> ret;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">FindLeft</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> <span class="built_in">floor</span>)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> ret = kM+<span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = kM+<span class="number">1</span>; i &gt;=<span class="number">0</span>; --i)</div><div class="line">        <span class="keyword">if</span>(kInfo[<span class="built_in">floor</span>][i] == <span class="number">1</span>)</div><div class="line">            ret = i;</div><div class="line">    <span class="keyword">return</span> ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">Solve</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kN; ++i)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> right = FindRight(i);</div><div class="line">        <span class="keyword">int</span> left = FindLeft(i);</div><div class="line">        <span class="keyword">if</span>(i == <span class="number">0</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(kLightsNum - kHasLightOn[i] != <span class="number">0</span>)</div><div class="line">            &#123;</div><div class="line">                kDp[i&amp;<span class="number">1</span>][<span class="number">0</span>] = (right*<span class="number">2</span>) + <span class="number">1</span>;</div><div class="line">                kDp[i&amp;<span class="number">1</span>][<span class="number">1</span>] = kM + <span class="number">2</span>;</div><div class="line">                kLightsNum -= kHasLightOn[i];</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">            &#123;</div><div class="line">                ret = kDp[i&amp;<span class="number">1</span>][<span class="number">0</span>] = kDp[i&amp;<span class="number">1</span>][<span class="number">1</span>] = right;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>((kLightsNum - kHasLightOn[i]) != <span class="number">0</span>)</div><div class="line">            &#123;</div><div class="line">                kDp[i&amp;<span class="number">1</span>][<span class="number">0</span>] = min(kDp[(i<span class="number">-1</span>)&amp;<span class="number">1</span>][<span class="number">0</span>] + (right*<span class="number">2</span>) + <span class="number">1</span>, kDp[(i<span class="number">-1</span>)&amp;<span class="number">1</span>][<span class="number">1</span>] + kM + <span class="number">1</span> + <span class="number">1</span>);</div><div class="line">                kDp[i&amp;<span class="number">1</span>][<span class="number">1</span>] = min(kDp[(i<span class="number">-1</span>)&amp;<span class="number">1</span>][<span class="number">0</span>] + kM + <span class="number">1</span> + <span class="number">1</span>, kDp[(i<span class="number">-1</span>)&amp;<span class="number">1</span>][<span class="number">1</span>] + (kM+<span class="number">1</span>-left)*<span class="number">2</span>+<span class="number">1</span>);</div><div class="line">                kLightsNum -= kHasLightOn[i];</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">            &#123;</div><div class="line">                ret = min(kDp[(i<span class="number">-1</span>)&amp;<span class="number">1</span>][<span class="number">0</span>] + right, kDp[(i<span class="number">-1</span>)&amp;<span class="number">1</span>][<span class="number">1</span>] + (kM+<span class="number">1</span>-left));</div><div class="line">                kLightsNum -= kHasLightOn[i];</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    Input();</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,Solve());</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1486,7 +1491,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1499,7 +1504,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
